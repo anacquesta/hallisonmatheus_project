@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Inter', sans-serif;
+
+    --background: 210 20% 98%;
+    --foreground: 215 25% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 15%;
+    --primary: 215 16% 47%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 215 16% 25%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 210 20% 92%;
+    --muted-foreground: 215 16% 45%;
+    --accent: 215 16% 47%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 215 16% 47%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 215 25% 15%;
+    --foreground: 210 20% 98%;
+    --card: 215 25% 18%;
+    --card-foreground: 210 20% 98%;
+    --primary: 210 20% 98%;
+    --primary-foreground: 215 25% 15%;
+  }
+}
+
+.container-legal {
+  width: 100%;
+  max-width: 1200px; /* Limit absolute width for ultra-wide screens */
+  width: 70vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 1024px) {
+  .container-legal {
+    width: 90vw;
+    max-width: none;
+  }
+}
+
+::selection {
+  background: rgba(100, 116, 139, 0.2);
+  color: #1a1a1b;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f8f9fa;
+}
+::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
