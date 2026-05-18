@@ -6,7 +6,7 @@ export const DEFAULTS = {
   hero_tag: 'Advocacia Estratégica',
   hero_title_1: 'Soluções jurídicas inteligentes para',
   hero_title_2: 'proteger o que realmente importa.',
-  hero_subtitle: 'Atuação personalizada e estratégica com foco em resultados reais e segurança jurídica para pessoas e empresas em Goiânia e Goiás.',
+  hero_subtitle: 'Atuação personalizada e estratégica com foco em resultados reais e práticos para pessoas e empresas em Goiânia e Goiás.',
   hero_badge: 'Atendimento sigiloso e 100% personalizado',
   hero_image: '',
   hero_whatsapp: 'https://wa.me/5500000000000',
