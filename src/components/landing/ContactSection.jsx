@@ -42,14 +42,20 @@ export default function ContactSection({ config = {} }) {
   return (
     <section id="contato" style={{ padding: '52px 0', background: '#ffffff' }}>
       <div className="container-legal" ref={ref}>
-        <div className="contact-grid-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: 60, alignItems: 'start' }}>
+        <div className="contact-grid-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: 60, alignItems: 'stretch' }}>
           {/* Left */}
-          <motion.div initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}}>
-            <div style={{ fontSize: 9, letterSpacing: '0.4em', textTransform: 'uppercase', color: '#b8966a', marginBottom: 24, fontWeight: 700 }}>Vamos Conversar?</div>
-            <h2 style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', fontSize: 'clamp(28px, 3.5vw, 46px)', fontWeight: 300, lineHeight: 1.1, color: '#1a1a1b', marginBottom: 48 }}>
-              Agende sua consulta<br />e dê o primeiro passo<br />para a <em style={{ color: '#162d5d' }}>solução.</em>
-            </h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }} 
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
+          >
+            <div>
+              <div style={{ fontSize: 9, letterSpacing: '0.4em', textTransform: 'uppercase', color: '#b8966a', marginBottom: 24, fontWeight: 700 }}>Vamos Conversar?</div>
+              <h2 style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', fontSize: 'clamp(28px, 3.5vw, 46px)', fontWeight: 300, lineHeight: 1.1, color: '#1a1a1b', marginBottom: 48 }}>
+                Agende sua consulta<br />e dê o primeiro passo<br />para a <em style={{ color: '#162d5d' }}>solução.</em>
+              </h2>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginTop: 'auto', marginBottom: 20 }}>
               <a href={waLink} target="_blank" rel="noopener noreferrer"
                 style={{ display: 'flex', alignItems: 'center', gap: 16, color: '#1a1a1b', textDecoration: 'none', fontSize: 14, transition: 'color 0.3s', fontWeight: 500 }}
                 onMouseEnter={e => e.currentTarget.style.color = '#162d5d'}
@@ -106,7 +112,7 @@ export default function ContactSection({ config = {} }) {
           display: grid;
           grid-template-columns: 1fr 1.5fr;
           gap: 100px;
-          align-items: start;
+          align-items: stretch;
         }
         .form-row-2 {
           display: grid;
