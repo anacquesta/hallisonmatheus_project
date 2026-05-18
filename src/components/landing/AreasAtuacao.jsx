@@ -4,7 +4,7 @@ import { motion, useInView } from 'framer-motion';
 const areas = [
   { num: '1', title: 'Direito Civil', desc: 'Contratos, responsabilidade civil, indenizações e soluções jurídicas estratégicas para relações cotidianas.' },
   { num: '2', title: 'Planejamento e Compliance', desc: 'Estruturação empresarial, programas de conformidade, investigação interna, due diligence e gestão de riscos.' },
-  { num: '3', title: 'Direito Trabalhista', desc: 'Defesa do empregador e consultoria preventiva, focando na redução de passivos e segurança jurídica.' },
+  { num: '3', title: 'Direito Trabalhista', desc: 'Defesa do empregador e consultoria preventiva, focando na redução de passivos e segurança jurídica. Defesa do empregado, com atendimento personalizado e defesa dos interesses do trabalhador.' },
   { num: '4', title: 'Direito Imobiliário', desc: 'Regularização fundiária, incorporação imobiliária, contratos de compra, venda e locação.' },
   { num: '5', title: 'Família e Sucessões', desc: 'Divórcio, inventário, planejamento sucessório e gestão de patrimônio familiar com sigilo absoluto.' },
 ];
