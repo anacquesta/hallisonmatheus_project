@@ -46,7 +46,7 @@ export default function ContactSection({ config = {} }) {
           {/* Left */}
           <motion.div initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}}>
             <div style={{ fontSize: 9, letterSpacing: '0.4em', textTransform: 'uppercase', color: '#b8966a', marginBottom: 24, fontWeight: 700 }}>Vamos Conversar?</div>
-            <h2 style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', fontSize: 'clamp(32px, 4vw, 56px)', fontWeight: 300, lineHeight: 1.1, color: '#1a1a1b', marginBottom: 48 }}>
+            <h2 style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', fontSize: 'clamp(28px, 3.5vw, 46px)', fontWeight: 300, lineHeight: 1.1, color: '#1a1a1b', marginBottom: 48 }}>
               Agende sua consulta<br />e dê o primeiro passo<br />para a <em style={{ color: '#162d5d' }}>solução.</em>
             </h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
