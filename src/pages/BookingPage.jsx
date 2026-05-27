@@ -19,6 +19,23 @@ const MONTHS = [
   'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
 ];
 
+const AREA_OPTIONS = [
+  'Direito Civil',
+  'Direito do Consumidor',
+  'Direito do Trabalho',
+  'Contratos',
+  'Direito Societário',
+  'Direito Empresarial',
+  'Direito Condominial',
+  'Consultoria Jurídica',
+  'Consultoria Preventiva',
+  'Compliance',
+  'Due Diligence',
+  'Chief Compliance Officer (CCO)',
+  'LGPD',
+  'Adequação e Estruturação Empresarial'
+];
+
 export default function BookingPage() {
   const navigate = useNavigate();
   const { config } = useSiteConfig();
@@ -37,6 +54,10 @@ export default function BookingPage() {
     name: '',
     email: '',
     phone: '',
+    client_type: 'PF',
+    area: '',
+    has_lawyer: false,
+    modality: 'Online',
     message: ''
   });
   
@@ -144,14 +165,24 @@ export default function BookingPage() {
     }
   };
 
+  const getCalculatedFee = () => {
+    if (formData.modality === 'Presencial') return 'A combinar';
+    if (formData.client_type === 'PF' && (formData.area === 'Direito do Trabalho' || formData.area === 'Direito do Consumidor')) {
+      return 'Gratuita';
+    }
+    return 'R$ 300,00';
+  };
+
+  const calculatedFee = getCalculatedFee();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!selectedDate || !selectedTime) {
       toast.error('Selecione data e hora para a consulta.');
       return;
     }
-    if (!formData.name || !formData.email || !formData.phone) {
-      toast.error('Preencha todos os campos obrigatórios.');
+    if (!formData.name || !formData.email || !formData.phone || !formData.area) {
+      toast.error('Preencha todos os campos obrigatórios (incluindo a Área da Consulta).');
       return;
     }
 
@@ -161,6 +192,11 @@ export default function BookingPage() {
       name: formData.name,
       email: formData.email,
       phone: formData.phone,
+      client_type: formData.client_type,
+      area: formData.area,
+      has_lawyer: formData.has_lawyer,
+      modality: formData.modality,
+      fee: calculatedFee,
       message: formData.message,
       date: selectedDateStr,
       time: apptTime
@@ -344,7 +380,7 @@ export default function BookingPage() {
               </div>
 
               {/* Main Container Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
                 
                 {/* Left Column: Interactive Calendar and Hour slots */}
                 <div className="booking-card p-6 space-y-6">
@@ -524,14 +560,67 @@ export default function BookingPage() {
                       </div>
                     </div>
 
+                    {/* Modality & Client Type */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-widest">Modalidade *</label>
+                        <select
+                          value={formData.modality}
+                          onChange={(e) => setFormData({ ...formData, modality: e.target.value })}
+                          className="w-full booking-input !pl-3"
+                        >
+                          <option value="Online">Online (Vídeo)</option>
+                          <option value="Presencial">Presencial (Sede)</option>
+                        </select>
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-widest">Tipo de Cliente *</label>
+                        <select
+                          value={formData.client_type}
+                          onChange={(e) => setFormData({ ...formData, client_type: e.target.value })}
+                          className="w-full booking-input !pl-3"
+                        >
+                          <option value="PF">Pessoa Física (PF)</option>
+                          <option value="CNPJ">Empresa (CNPJ)</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Area & Has Lawyer */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-widest">Área da Consulta *</label>
+                        <select
+                          value={formData.area}
+                          onChange={(e) => setFormData({ ...formData, area: e.target.value })}
+                          className="w-full booking-input !pl-3"
+                          required
+                        >
+                          <option value="" disabled>Selecione...</option>
+                          {AREA_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                        </select>
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-widest">Já possui advogado? *</label>
+                        <select
+                          value={formData.has_lawyer ? 'sim' : 'nao'}
+                          onChange={(e) => setFormData({ ...formData, has_lawyer: e.target.value === 'sim' })}
+                          className="w-full booking-input !pl-3"
+                        >
+                          <option value="nao">Não</option>
+                          <option value="sim">Sim</option>
+                        </select>
+                      </div>
+                    </div>
+
                     {/* Message */}
                     <div className="space-y-1.5">
-                      <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-widest">Assunto da Consulta</label>
+                      <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-widest">Breve relato sobre o tema</label>
                       <div className="relative">
                         <MessageSquare className="absolute left-3.5 top-3.5 w-4 h-4 text-gray-400 pointer-events-none" />
                         <textarea
-                          rows={4}
-                          placeholder="Descreva brevemente sua dúvida..."
+                          rows={3}
+                          placeholder="Descreva brevemente o que precisa..."
                           value={formData.message}
                           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                           className="w-full booking-input resize-none"
@@ -541,9 +630,32 @@ export default function BookingPage() {
 
                     {/* Summary details before submission */}
                     {selectedDate && selectedTime && (
-                      <div className="bg-[#B8A068]/5 border border-[#B8A068]/20 rounded p-3 text-[11px] text-gray-600 space-y-1 shadow-inner">
-                        <p><strong>Data:</strong> {selectedDate.toLocaleDateString('pt-BR')}</p>
-                        <p><strong>Horário:</strong> {selectedTime}</p>
+                      <div className="bg-[#1A2B4A]/5 border border-[#1A2B4A]/10 rounded p-4 text-[12px] text-[#1A2B4A] space-y-2 shadow-inner">
+                        <div className="flex justify-between items-center border-b border-[#1A2B4A]/10 pb-2">
+                          <span className="font-semibold uppercase tracking-widest text-[9px]">Resumo do Agendamento</span>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-1 mt-2 text-gray-600 text-xs">
+                          <p><strong className="text-gray-800">Data:</strong> {selectedDate.toLocaleDateString('pt-BR')}</p>
+                          <p><strong className="text-gray-800">Horário:</strong> {selectedTime}</p>
+                          <p><strong className="text-gray-800">Modalidade:</strong> {formData.modality}</p>
+                          <p className="truncate"><strong className="text-gray-800">Área:</strong> {formData.area || '-'}</p>
+                        </div>
+                        <div className="mt-3 pt-3 border-t border-[#1A2B4A]/10 flex justify-between items-center">
+                          <span className="font-semibold text-xs text-gray-800">Valor da Consulta:</span>
+                          <span className={`font-bold ${calculatedFee === 'Gratuita' ? 'text-emerald-600' : 'text-[#B8A068]'}`}>{calculatedFee}</span>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Warning about payment if fee is 300 */}
+                    {calculatedFee !== 'Gratuita' && calculatedFee !== 'A combinar' && (
+                      <div className="bg-amber-50 border border-amber-200 text-amber-800 text-[11px] p-3 rounded">
+                        <strong>Aviso Importante:</strong> A consulta somente será confirmada e realizada após o envio do comprovante de pagamento da taxa de {calculatedFee}. Nossa equipe entrará em contato com as instruções.
+                      </div>
+                    )}
+                    {calculatedFee === 'A combinar' && (
+                      <div className="bg-amber-50 border border-amber-200 text-amber-800 text-[11px] p-3 rounded">
+                        <strong>Aviso Importante:</strong> Consultorias presenciais possuem o valor a combinar dependendo do local de atendimento. Entraremos em contato com a proposta antes de confirmar a agenda.
                       </div>
                     )}
 
@@ -617,7 +729,7 @@ export default function BookingPage() {
                 <button
                   onClick={() => {
                     setSubmittedAppt(null);
-                    setFormData({ name: '', email: '', phone: '', message: '' });
+                    setFormData({ name: '', email: '', phone: '', client_type: 'PF', area: '', has_lawyer: false, modality: 'Online', message: '' });
                     setSelectedDate(null);
                     setSelectedTime(null);
                   }}

@@ -278,7 +278,8 @@ export default function AdminAppointments() {
                       <tr key={appt.id} className="hover:bg-gray-50/50 transition-colors">
                         <td className="px-6 py-4">
                           <p className="font-semibold text-gray-900 leading-none">{appt.name}</p>
-                          <p className="text-xs text-gray-400 mt-1 truncate max-w-[200px]">{appt.email}</p>
+                          <p className="text-[9px] font-bold text-[#B8A068] mt-1 truncate max-w-[200px] uppercase tracking-wider">{(appt.modality || 'Padrão')} • {(appt.area || 'Geral')}</p>
+                          <p className="text-xs text-gray-400 mt-0.5 truncate max-w-[200px]">{appt.email}</p>
                         </td>
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-1.5 text-gray-700">
@@ -348,6 +349,30 @@ export default function AdminAppointments() {
                 <div className="space-y-1">
                   <span className="flex items-center gap-1.5 text-[9px] font-bold text-gray-400 uppercase tracking-wider"><Phone className="w-3 h-3" /> Telefone/WhatsApp</span>
                   <p className="text-sm font-semibold text-gray-900 font-mono">{selectedAppt.phone}</p>
+                </div>
+              </div>
+
+              {/* Consultation Details */}
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-6 bg-white border border-gray-200/50 rounded-xl p-5">
+                <div className="space-y-1">
+                  <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider block">Tipo de Cliente</span>
+                  <p className="text-sm font-semibold text-gray-900">{selectedAppt.client_type === 'CNPJ' ? 'Empresa (CNPJ)' : (selectedAppt.client_type === 'PF' ? 'Pessoa Física (PF)' : '-')}</p>
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider block">Modalidade</span>
+                  <p className="text-sm font-semibold text-gray-900">{selectedAppt.modality || '-'}</p>
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider block">Área da Consulta</span>
+                  <p className="text-sm font-semibold text-gray-900">{selectedAppt.area || '-'}</p>
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider block">Já possui advogado?</span>
+                  <p className="text-sm font-semibold text-gray-900">{selectedAppt.has_lawyer ? 'Sim' : 'Não'}</p>
+                </div>
+                <div className="space-y-1 md:col-span-2">
+                  <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider block">Valor da Consulta / Honorários</span>
+                  <p className={`text-sm font-bold ${selectedAppt.fee === 'Gratuita' ? 'text-emerald-600' : 'text-[#B8A068]'}`}>{selectedAppt.fee || '-'}</p>
                 </div>
               </div>
 
