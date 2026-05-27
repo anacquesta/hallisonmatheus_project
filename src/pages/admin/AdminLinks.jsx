@@ -33,7 +33,7 @@ export default function AdminLinks() {
 
         <SectionCard
           title="Redes Sociais"
-          description="Links para Instagram e LinkedIn."
+          description="Links para Instagram, LinkedIn e Website."
           icon={Instagram}
         >
           <EditableText
@@ -47,6 +47,12 @@ export default function AdminLinks() {
             value={config.links_linkedin}
             onSave={(v) => set('links', 'linkedin', v)}
             hint="Cole o endereço completo do seu perfil. Ex: https://www.linkedin.com/in/seuperfil/"
+          />
+          <EditableText
+            label="Link do Website / Outro (Globo no Rodapé)"
+            value={config.links_website}
+            onSave={(v) => set('links', 'website', v)}
+            hint="Se preenchido, exibirá o ícone de globo de rede no rodapé do site. Ex: https://seuwebsite.com.br"
           />
         </SectionCard>
 

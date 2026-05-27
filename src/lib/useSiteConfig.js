@@ -20,6 +20,7 @@ export const DEFAULTS = {
   links_whatsapp: 'https://wa.me/5500000000000',
   links_instagram: 'https://www.instagram.com/hallisonmatheus.adv/',
   links_linkedin: 'https://www.linkedin.com/in/hallison-souza-38a056259/',
+  links_website: '',
 
   contato_email: 'contato@hallisonmatheus.adv.br',
   contato_telefone: '+55 (62) 99999-9999',

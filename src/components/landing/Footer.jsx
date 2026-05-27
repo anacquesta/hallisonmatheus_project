@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Mail, Phone } from 'lucide-react';
+import { MapPin, Mail, Phone, Globe } from 'lucide-react';
 
 const navLinks = [
   { href: '#inicio', label: 'Início' },
@@ -16,11 +16,22 @@ export default function Footer({ config = {} }) {
   const slogan = config.rodape_slogan || 'Estratégia jurídica com foco em resultados, segurança e tranquilidade.';
   const instagram = config.links_instagram || 'https://www.instagram.com/hallisonmatheus.adv/';
   const linkedin = config.links_linkedin || 'https://www.linkedin.com/in/hallison-souza-38a056259/';
-  const whatsapp = config.links_whatsapp || 'https://wa.me/5500000000000';
   const email = config.contato_email || 'contato@hallisonmatheus.adv.br';
   const telefone = config.contato_telefone || '+55 (62) 99999-9999';
   const cidade = config.contato_cidade || 'Goiânia — GO';
   const oab = config.contato_oab || 'OAB/GO';
+
+  const socials = [
+    { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>, url: instagram },
+    { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>, url: linkedin }
+  ];
+
+  if (config.links_website) {
+    socials.push({
+      icon: <Globe size={18} strokeWidth={1.8} />,
+      url: config.links_website
+    });
+  }
 
   const linkStyle = { fontSize: 14, color: '#a1a1aa', textDecoration: 'none', transition: 'color 0.3s', display: 'block', marginBottom: 12 };
 
@@ -39,11 +50,7 @@ export default function Footer({ config = {} }) {
             </div>
             <p style={{ fontSize: 14, color: '#475569', lineHeight: 1.6, marginBottom: 32 }}>{slogan}</p>
             <div style={{ display: 'flex', gap: 16 }}>
-              {[
-                { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>, url: instagram },
-                { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>, url: linkedin },
-                { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.547-3.937l.361.214a9.878 9.878 0 005.032 1.378h.005c5.451 0 9.886-4.434 9.889-9.885.002-2.642-1.029-5.125-2.902-6.999a9.855 9.855 0 00-6.995-2.895c-5.452 0-9.887 4.434-9.889 9.884-.001 2.223.546 4.39 1.583 6.26l.237.376-1.029 3.755 3.845-.996z"/></svg>, url: whatsapp },
-              ].map((s, i) => (
+              {socials.map((s, i) => (
                 <a key={i} href={s.url} target="_blank" rel="noopener noreferrer"
                   style={{ width: 36, height: 36, border: '1px solid rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#162d5d', borderRadius: '50%', textDecoration: 'none', transition: 'all 0.3s' }}
                   onMouseEnter={e => { e.currentTarget.style.borderColor = '#112245'; e.currentTarget.style.color = '#112245'; }}
