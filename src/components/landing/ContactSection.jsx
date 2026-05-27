@@ -48,6 +48,7 @@ export default function ContactSection({ config = {} }) {
               client_name: form.name,
               client_email: form.email,
               client_whatsapp: form.whatsapp || 'Não informado',
+              has_whatsapp: !!cleanPhone,
               whatsapp_link: whatsappLink,
               email_subject: form.subject || 'Contato via Site',
               email_message: form.message
